@@ -1,0 +1,51 @@
+﻿@model SpravaUdalosti.Models.Interprets
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Interprets</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NazevInterpreta" class="control-label"></label>
+                <input asp-for="NazevInterpreta" class="form-control" />
+                <span asp-validation-for="NazevInterpreta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PopisInterpreta" class="control-label"></label>
+                <input asp-for="PopisInterpreta" class="form-control" />
+                <span asp-validation-for="PopisInterpreta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HudebniZanr" class="control-label"></label>
+                <select asp-for="HudebniZanr" class="form-control">
+                <option selected disabled>Vyberte hudební žánr</option>
+                    @foreach(var item in Enum.GetValues(typeof(SpravaUdalosti.Models.HudebniZanr)))
+                    {
+                        <option value="@item">@item</option>
+                    })
+                </select>
+                <span asp-validation-for="HudebniZanr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZemePuvodu" class="control-label"></label>
+                <input asp-for="ZemePuvodu" class="form-control" />
+                <span asp-validation-for="ZemePuvodu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,53 @@
+﻿@model List<SpravaUdalosti.Controllers.AdminController.UzivatelInfo>
+@using SpravaUdalosti.Data
+@{
+    ViewData["Title"] = "Admin sekce";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Uživatel
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Role
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Jmeno
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    <button type="button" onclick="prepinaniRoli('@item.Jmeno', '@Role.RoleUser')" class="btn btn-@(item.Role.Contains(Role.RoleUser) ? "primary" : "light")">@Role.RoleUser</button>
+                    <button type="button" onclick="prepinaniRoli('@item.Jmeno', '@Role.RoleAdmin')" class="btn btn-@(item.Role.Contains(Role.RoleAdmin) ? "danger" : "light")">@Role.RoleAdmin</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form method="post" asp-controller="Admin" asp-action="Role" id="formRole">
+    <input type="hidden" name="userName" id="userName" />
+    <input type="hidden" name="roleName" id="roleName" />
+</form>
+
+@section Scripts {
+    <script>
+        function prepinaniRoli(userName, roleName) {
+            $("#userName").val(userName);
+            $("#roleName").val(roleName);
+            $("#formRole").trigger("submit");
+        }
+    </script>
+}

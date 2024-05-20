@@ -27,11 +27,13 @@ namespace SpravaUdalosti.Models
         [Required(ErrorMessage = "Zadejte maximální počet účastníků")]
         public int MaxPocetUcastniku { get; set; }
 
+        public int ZucastniSe { get; set; } = 0;
+
         [Required(ErrorMessage = "Zadejte vystupujícího interpreta")]
         public int InterpretId { get; set; }
 
         [ForeignKey("InterpretId")]
-        public Interprets Interpret { get; set; }
+        public Interprets? Interpret { get; set; } = null;
 
 
 
