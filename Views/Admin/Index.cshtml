@@ -1,4 +1,4 @@
-﻿@model List<SpravaUdalosti.Controllers.AdminController.UzivatelInfo>
+﻿@model List<SpravaUdalosti.Controllers.AdminController.UserInfo>
 @using SpravaUdalosti.Data
 @{
     ViewData["Title"] = "Admin sekce";
@@ -23,14 +23,14 @@
         {
             <tr>
                 <td>
-                    @item.Jmeno
+                    @item.Name
                 </td>
                 <td>
                     @item.Email
                 </td>
                 <td>
-                    <button type="button" onclick="prepinaniRoli('@item.Jmeno', '@Role.RoleUser')" class="btn btn-@(item.Role.Contains(Role.RoleUser) ? "primary" : "light")">@Role.RoleUser</button>
-                    <button type="button" onclick="prepinaniRoli('@item.Jmeno', '@Role.RoleAdmin')" class="btn btn-@(item.Role.Contains(Role.RoleAdmin) ? "danger" : "light")">@Role.RoleAdmin</button>
+                    <button type="button" onclick="prepinaniRoli('@item.Name', '@Roles.UserRole')" class="btn btn-@(item.Role.Contains(Roles.UserRole) ? "primary" : "light")">@Roles.UserRole</button>
+                    <button type="button" onclick="prepinaniRoli('@item.Name', '@Roles.AdminRole')" class="btn btn-@(item.Role.Contains(Roles.AdminRole) ? "danger" : "light")">@Roles.AdminRole</button>
                 </td>
             </tr>
         }

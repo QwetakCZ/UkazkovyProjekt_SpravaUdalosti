@@ -56,7 +56,7 @@ namespace SpravaUdalosti.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NazevInterpreta,PopisInterpreta,HudebniZanr,ZemePuvodu")] Interprets interprets)
+        public async Task<IActionResult> Create([Bind("Id,NameOfInterpret,DescriptionOfInterpret,MusicGenre,CountryOfOrigin")] Interprets interprets)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace SpravaUdalosti.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NazevInterpreta,PopisInterpreta,HudebniZanr,ZemePuvodu")] Interprets interprets)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NameOfInterpret,DescriptionOfInterpret,MusicGenre,CountryOfOrigin")] Interprets interprets)
         {
             if (id != interprets.Id)
             {

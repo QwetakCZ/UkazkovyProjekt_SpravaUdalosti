@@ -124,14 +124,14 @@ namespace SpravaUdalosti.Areas.Identity.Pages.Account
             {
                 return false;
             }
-            if ((await _roleManager.FindByNameAsync(Role.RoleAdmin)) == null)
+            if ((await _roleManager.FindByNameAsync(Roles.AdminRole)) == null)
             {
-                await _roleManager.CreateAsync(new IdentityRole(Role.RoleAdmin));
+                await _roleManager.CreateAsync(new IdentityRole(Roles.AdminRole));
             }
 
-            if ((await _roleManager.FindByNameAsync(Role.RoleUser)) == null)
+            if ((await _roleManager.FindByNameAsync(Roles.UserRole)) == null)
             {
-                await _roleManager.CreateAsync(new IdentityRole(Role.RoleUser));
+                await _roleManager.CreateAsync(new IdentityRole(Roles.UserRole));
             }
             return true;
         }
@@ -156,11 +156,11 @@ namespace SpravaUdalosti.Areas.Identity.Pages.Account
 
                     if (jePrvniUzivatel)
                     {
-                        await _userManager.AddToRoleAsync(user, Role.RoleAdmin);
+                        await _userManager.AddToRoleAsync(user, Roles.AdminRole);
                     }
                     else
                     { 
-                        await _userManager.AddToRoleAsync(user, Role.RoleUser);
+                        await _userManager.AddToRoleAsync(user, Roles.UserRole);
                     }
 
                     var userId = await _userManager.GetUserIdAsync(user);

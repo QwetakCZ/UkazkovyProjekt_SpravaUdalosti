@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace SpravaUdalosti.Models
-{   //Zalození enumu pro zanr hudby
-    public enum HudebniZanr : int
+{   // Creating an enum for music genre
+    public enum MusicGenre : int
     {   
         Techno = 1,
         House = 2,
@@ -20,24 +20,24 @@ namespace SpravaUdalosti.Models
     public class Interprets
     {
 
-        //Zalození modelu pro interpreta + tabulka v databázi
+        // Creating a model for an artist + table in the database
         [Key]
         public int Id { get; set; }
 
         [Required]
         [MaxLength(30)]
-        public string NazevInterpreta { get; set; }
+        public string NameOfInterpret { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string PopisInterpreta { get; set; }
+        public string DescriptionOfInterpret { get; set; }
 
         [Required]
-        [EnumDataType(typeof(HudebniZanr))]
-        public HudebniZanr HudebniZanr { get; set; }
+        [EnumDataType(typeof(MusicGenre))]
+        public MusicGenre MusicGenre { get; set; }
 
         [Required]
-        public string ZemePuvodu { get; set; }
+        public string CountryOfOrigin { get; set; }
 
        
 
