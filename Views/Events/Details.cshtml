@@ -1,0 +1,54 @@
+﻿@model SpravaUdalosti.Models.Event
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NazevUdálosti)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NazevUdálosti)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PopisUdalosti)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PopisUdalosti)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DatumUdalosti)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DatumUdalosti)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MistoKonani)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MistoKonani)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaxPocetUcastniku)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaxPocetUcastniku)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Interpret)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Interpret.NazevInterpreta)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
