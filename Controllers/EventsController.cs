@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,7 @@ namespace SpravaUdalosti.Controllers
         }
 
         // GET: Events/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NazevInterpreta");
@@ -58,6 +60,7 @@ namespace SpravaUdalosti.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Id,NazevUdálosti,PopisUdalosti,DatumUdalosti,MistoKonani,MaxPocetUcastniku,InterpretId")] Event @event)
         {
             if (ModelState.IsValid)
@@ -71,6 +74,7 @@ namespace SpravaUdalosti.Controllers
         }
 
         // GET: Events/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -92,7 +96,8 @@ namespace SpravaUdalosti.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NazevUdálosti,PopisUdalosti,DatumUdalosti,MistoKonani,MaxPocetUcastniku,InterpretId")] Event @event)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NazevUdálosti,PopisUdalosti,DatumUdalosti,MistoKonani,MaxPocetUcastniku,InterpretId,ZucastniSe")] Event @event)
         {
             if (id != @event.Id)
             {
@@ -124,6 +129,7 @@ namespace SpravaUdalosti.Controllers
         }
 
         // GET: Events/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -145,6 +151,7 @@ namespace SpravaUdalosti.Controllers
         // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var @event = await _context.Event.FindAsync(id);

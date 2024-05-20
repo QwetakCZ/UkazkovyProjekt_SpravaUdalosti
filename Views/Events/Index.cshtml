@@ -24,7 +24,7 @@
             }
         </p>
         <table class="table table-striped">
-            <thead>
+            <thead class="table-dark">
                 <tr>
                     <th>
                         Název akce
@@ -58,7 +58,8 @@
                             @Html.DisplayFor(modelItem => item.NazevUdálosti)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.PopisUdalosti)
+                            @(item.PopisUdalosti.Length > 15 ? item.PopisUdalosti.Substring(0, 15) + "..." : item.PopisUdalosti)
+                            
                         </td>
                         <td>
                             @item.DatumUdalosti.ToShortDateString() - @item.DatumUdalosti.ToShortTimeString()

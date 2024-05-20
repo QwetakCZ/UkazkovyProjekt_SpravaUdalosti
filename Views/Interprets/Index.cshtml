@@ -4,25 +4,25 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Seznam interpretů</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Nový interpret</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-striped">
+    <thead class="table-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NazevInterpreta)
+                Název interpreta
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PopisInterpreta)
+                Popis interpreta
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HudebniZanr)
+                Hudební žánr
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ZemePuvodu)
+                Země původu
             </th>
             <th></th>
         </tr>
@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.ZemePuvodu)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editace</a> 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">Detail</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Odstranit</a>
             </td>
         </tr>
 }
