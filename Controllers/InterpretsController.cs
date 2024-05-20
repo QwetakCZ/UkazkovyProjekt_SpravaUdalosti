@@ -11,24 +11,23 @@ using SpravaUdalosti.Models;
 
 namespace SpravaUdalosti.Controllers
 {
-    public class EventsController : Controller
+    [Authorize(Roles = "Admin")]
+    public class InterpretsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public EventsController(ApplicationDbContext context)
+        public InterpretsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Events
+        // GET: Interprets
         public async Task<IActionResult> Index()
         {
-            
-            var applicationDbContext = _context.Event.Include(x => x.Interpret);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Interprets.ToListAsync());
         }
 
-        // GET: Events/Details/5
+        // GET: Interprets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,45 +35,39 @@ namespace SpravaUdalosti.Controllers
                 return NotFound();
             }
 
-            var @event = await _context.Event
-                .Include(x => x.Interpret)
+            var interprets = await _context.Interprets
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (@event == null)
+            if (interprets == null)
             {
                 return NotFound();
             }
 
-            return View(@event);
+            return View(interprets);
         }
 
-        // GET: Events/Create
-        [Authorize(Roles = "Admin")]
+        // GET: Interprets/Create
         public IActionResult Create()
         {
-            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NazevInterpreta");
             return View();
         }
 
-        // POST: Events/Create
+        // POST: Interprets/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("Id,NazevUdálosti,PopisUdalosti,DatumUdalosti,MistoKonani,MaxPocetUcastniku,InterpretId")] Event @event)
+        public async Task<IActionResult> Create([Bind("Id,NazevInterpreta,PopisInterpreta,HudebniZanr,ZemePuvodu")] Interprets interprets)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(@event);
+                _context.Add(interprets);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NazevInterpreta", @event.InterpretId);
-            return View(@event);
+            return View(interprets);
         }
 
-        // GET: Events/Edit/5
-        [Authorize(Roles = "Admin")]
+        // GET: Interprets/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,24 +75,22 @@ namespace SpravaUdalosti.Controllers
                 return NotFound();
             }
 
-            var @event = await _context.Event.FindAsync(id);
-            if (@event == null)
+            var interprets = await _context.Interprets.FindAsync(id);
+            if (interprets == null)
             {
                 return NotFound();
             }
-            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NazevInterpreta", @event.InterpretId);
-            return View(@event);
+            return View(interprets);
         }
 
-        // POST: Events/Edit/5
+        // POST: Interprets/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NazevUdálosti,PopisUdalosti,DatumUdalosti,MistoKonani,MaxPocetUcastniku,InterpretId,ZucastniSe")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NazevInterpreta,PopisInterpreta,HudebniZanr,ZemePuvodu")] Interprets interprets)
         {
-            if (id != @event.Id)
+            if (id != interprets.Id)
             {
                 return NotFound();
             }
@@ -108,12 +99,12 @@ namespace SpravaUdalosti.Controllers
             {
                 try
                 {
-                    _context.Update(@event);
+                    _context.Update(interprets);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventExists(@event.Id))
+                    if (!InterpretsExists(interprets.Id))
                     {
                         return NotFound();
                     }
@@ -124,12 +115,10 @@ namespace SpravaUdalosti.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NazevInterpreta", @event.InterpretId);
-            return View(@event);
+            return View(interprets);
         }
 
-        // GET: Events/Delete/5
-        [Authorize(Roles = "Admin")]
+        // GET: Interprets/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,53 +126,34 @@ namespace SpravaUdalosti.Controllers
                 return NotFound();
             }
 
-            var @event = await _context.Event
-                .Include(x => x.Interpret)
+            var interprets = await _context.Interprets
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (@event == null)
+            if (interprets == null)
             {
                 return NotFound();
             }
 
-            return View(@event);
+            return View(interprets);
         }
 
-        // POST: Events/Delete/5
+        // POST: Interprets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var @event = await _context.Event.FindAsync(id);
-            if (@event != null)
+            var interprets = await _context.Interprets.FindAsync(id);
+            if (interprets != null)
             {
-                _context.Event.Remove(@event);
+                _context.Interprets.Remove(interprets);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EventExists(int id)
+        private bool InterpretsExists(int id)
         {
-            return _context.Event.Any(e => e.Id == id);
-        }
-
-        /// <summary>
-        /// Metoda pro navýšení počtu účastníků
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<IActionResult> PridatSe(int id)
-        {
-            var pricti = await _context.Event.FindAsync(id);
-            if (pricti != null)
-            {
-                pricti.ZucastniSe++;
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return _context.Interprets.Any(e => e.Id == id);
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SpravaUdalosti.Models.Interprets>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Seznam interpretů</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nový interpret</a>
+</p>
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                Název interpreta
+            </th>
+            <th>
+                Popis interpreta
+            </th>
+            <th>
+                Hudební žánr
+            </th>
+            <th>
+                Země původu
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NazevInterpreta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PopisInterpreta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HudebniZanr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZemePuvodu)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editace</a> 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">Detail</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Odstranit</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

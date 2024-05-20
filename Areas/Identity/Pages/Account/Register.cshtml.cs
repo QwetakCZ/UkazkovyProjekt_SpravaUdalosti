@@ -158,6 +158,10 @@ namespace SpravaUdalosti.Areas.Identity.Pages.Account
                     {
                         await _userManager.AddToRoleAsync(user, Role.RoleAdmin);
                     }
+                    else
+                    { 
+                        await _userManager.AddToRoleAsync(user, Role.RoleUser);
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

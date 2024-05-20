@@ -1,0 +1,45 @@
+﻿@model SpravaUdalosti.Models.Interprets
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3 class="text-danger">Jste si jist, že chcete odstranit tohoto interpreta?</h3>
+<div>
+    <h4>Interprets</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NazevInterpreta)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NazevInterpreta)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PopisInterpreta)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PopisInterpreta)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HudebniZanr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HudebniZanr)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ZemePuvodu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ZemePuvodu)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Odstranit" class="btn btn-danger" /> 
+        <a asp-action="Index" class="btn btn-outline-secondary px-2">Zpátky na výpis interpretů</a>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+﻿@model SpravaUdalosti.Models.Interprets
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detail interpreta</h1>
+
+<div>
+    <h4>@Model.NazevInterpreta</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Název interpreta
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NazevInterpreta)
+        </dd>
+        <dt class="col-sm-2">
+            Popis interpreta
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PopisInterpreta)
+        </dd>
+        <dt class="col-sm-2">
+            Hudební žánr
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HudebniZanr)
+        </dd>
+        <dt class="col-sm-2">
+            Země původu
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ZemePuvodu)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Editace</a> 
+    <a asp-action="Index" class="btn btn-outline-secondary py-2">Zpátky na seznam interpretů</a>
+</div>
