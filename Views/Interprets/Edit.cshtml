@@ -14,30 +14,30 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-floating py-2">
-                <label asp-for="NazevInterpreta" class="control-label opacity-50">Název interpreta</label>
-                <input asp-for="NazevInterpreta" class="form-control" />
-                <span asp-validation-for="NazevInterpreta" class="text-danger"></span>
+                <label asp-for="NameOfInterpret" class="control-label opacity-50">Název interpreta</label>
+                <input asp-for="NameOfInterpret" class="form-control" />
+                <span asp-validation-for="NameOfInterpret" class="text-danger"></span>
             </div>
             <div class="form-floating py-2">
-                <label asp-for="PopisInterpreta" class="control-label opacity-50">Popis interpreta</label>
-                <input asp-for="PopisInterpreta" class="form-control" />
-                <span asp-validation-for="PopisInterpreta" class="text-danger"></span>
+                <label asp-for="DescriptionOfInterpret" class="control-label opacity-50">Popis interpreta</label>
+                <input asp-for="DescriptionOfInterpret" class="form-control" />
+                <span asp-validation-for="DescriptionOfInterpret" class="text-danger"></span>
             </div>
             <div class="form-floating py-2">
-                <label asp-for="HudebniZanr" class="control-label opacity-50">Hudební žánr</label>
-                <select asp-for="HudebniZanr" class="form-control">
+                <label asp-for="MusicGenre" class="control-label opacity-50">Hudební žánr</label>
+                <select asp-for="MusicGenre" class="form-control">
                     <option selected disabled>Vyberte hudební žánr</option>
-                    @foreach (var item in Enum.GetValues(typeof(SpravaUdalosti.Models.HudebniZanr)))
+                    @foreach (var item in Enum.GetValues(typeof(SpravaUdalosti.Models.MusicGenre)))
                     {
                         <option value="@item">@item</option>
                     })
                 </select>
-                <span asp-validation-for="HudebniZanr" class="text-danger"></span>
+                <span asp-validation-for="MusicGenre" class="text-danger"></span>
             </div>
             <div class="form-floating py-2">
-                <label asp-for="ZemePuvodu" class="control-label opacity-50">Země původu</label>
-                <input asp-for="ZemePuvodu" class="form-control" />
-                <span asp-validation-for="ZemePuvodu" class="text-danger"></span>
+                <label asp-for="CountryOfOrigin" class="control-label opacity-50">Země původu</label>
+                <input asp-for="CountryOfOrigin" class="form-control" />
+                <span asp-validation-for="CountryOfOrigin" class="text-danger"></span>
             </div>
             <div class="form-floating py-2">
                 <input type="submit" value="Uložit" class="btn btn-primary" />

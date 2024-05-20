@@ -7,7 +7,7 @@
 <h1>Detail akce</h1>
 
 <div>
-    <h4>@Model.NazevUdálosti</h4>
+    <h4>@Model.EventName</h4>
     <hr />
     <dl class="row">
         
@@ -15,37 +15,37 @@
             Popis akce
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PopisUdalosti)
+            @Html.DisplayFor(model => model.EventDescription)
         </dd>
         <dt class = "col-sm-2">
             Datum
         </dt>
         <dd class = "col-sm-10">
-            @Model.DatumUdalosti.ToShortDateString() - 
-            @Model.DatumUdalosti.ToShortTimeString()
+            @Model.EventDate.ToShortDateString() - 
+            @Model.EventDate.ToShortTimeString()
         </dd>
         <dt class = "col-sm-2">
             Místo konání
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MistoKonani)
+            @Html.DisplayFor(model => model.EventPlace)
         </dd>
         <dt class = "col-sm-2">
             Maximální počet účastníků
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaxPocetUcastniku)
+            @Html.DisplayFor(model => model.MaxNumberOfParticipants)
         </dd>
         <dt class = "col-sm-2">
             Interpret
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Interpret.NazevInterpreta)
+            @Html.DisplayFor(model => model.Interpret.NameOfInterpret)
         </dd>
     </dl>
 </div>
 <div>
-    @if(User.IsInRole(Role.RoleAdmin))
+    @if(User.IsInRole(Roles.AdminRole))
     {
         <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Editace</a>
     }

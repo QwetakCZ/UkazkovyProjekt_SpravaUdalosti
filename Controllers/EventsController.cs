@@ -51,7 +51,7 @@ namespace SpravaUdalosti.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NazevInterpreta");
+            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NameOfInterpret");
             return View();
         }
 
@@ -61,7 +61,7 @@ namespace SpravaUdalosti.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("Id,NazevUdálosti,PopisUdalosti,DatumUdalosti,MistoKonani,MaxPocetUcastniku,InterpretId")] Event @event)
+        public async Task<IActionResult> Create([Bind("Id,EventName,EventDescription,EventDate,EventPlace,MaxNumberOfParticipants,InterpretId")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +69,7 @@ namespace SpravaUdalosti.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NazevInterpreta", @event.InterpretId);
+            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NameOfInterpret", @event.InterpretId);
             return View(@event);
         }
 
@@ -87,7 +87,7 @@ namespace SpravaUdalosti.Controllers
             {
                 return NotFound();
             }
-            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NazevInterpreta", @event.InterpretId);
+            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NameOfInterpret", @event.InterpretId);
             return View(@event);
         }
 
@@ -97,7 +97,7 @@ namespace SpravaUdalosti.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NazevUdálosti,PopisUdalosti,DatumUdalosti,MistoKonani,MaxPocetUcastniku,InterpretId,ZucastniSe")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,EventName,EventDescription,EventDate,EventPlace,MaxNumberOfParticipants,InterpretId,WillParticipate")] Event @event)
         {
             if (id != @event.Id)
             {
@@ -124,7 +124,7 @@ namespace SpravaUdalosti.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NazevInterpreta", @event.InterpretId);
+            ViewData["InterpretId"] = new SelectList(_context.Set<Interprets>(), "Id", "NameOfInterpret", @event.InterpretId);
             return View(@event);
         }
 
@@ -174,12 +174,12 @@ namespace SpravaUdalosti.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<IActionResult> PridatSe(int id)
+        public async Task<IActionResult> AddYourself(int id)
         {
             var pricti = await _context.Event.FindAsync(id);
             if (pricti != null)
             {
-                pricti.ZucastniSe++;
+                pricti.WillParticipate++;
             }
 
             await _context.SaveChangesAsync();

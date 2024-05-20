@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SpravaUdalosti.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateDB : Migration
+    public partial class CreateDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,10 +53,10 @@ namespace SpravaUdalosti.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NazevInterpreta = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    PopisInterpreta = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    HudebniZanr = table.Column<int>(type: "int", nullable: false),
-                    ZemePuvodu = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NameOfInterpret = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    DescriptionOfInterpret = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    MusicGenre = table.Column<int>(type: "int", nullable: false),
+                    CountryOfOrigin = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,11 +69,12 @@ namespace SpravaUdalosti.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NazevUdálosti = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    PopisUdalosti = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DatumUdalosti = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MistoKonani = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    MaxPocetUcastniku = table.Column<int>(type: "int", nullable: false),
+                    EventName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    EventDescription = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    EventDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EventPlace = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MaxNumberOfParticipants = table.Column<int>(type: "int", nullable: false),
+                    WillParticipate = table.Column<int>(type: "int", nullable: false),
                     InterpretId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

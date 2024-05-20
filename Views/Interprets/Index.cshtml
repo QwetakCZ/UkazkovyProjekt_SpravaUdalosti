@@ -31,16 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NazevInterpreta)
+                @Html.DisplayFor(modelItem => item.NameOfInterpret)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PopisInterpreta)
+                @Html.DisplayFor(modelItem => item.DescriptionOfInterpret)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HudebniZanr)
+                @Html.DisplayFor(modelItem => item.MusicGenre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ZemePuvodu)
+                @Html.DisplayFor(modelItem => item.CountryOfOrigin)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editace</a> 

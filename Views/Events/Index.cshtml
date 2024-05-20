@@ -12,13 +12,16 @@
     @if (Model.Count() == 0)
     {
         <p>Nejsou naplánované žádne akce</p>
-        <a asp-action="Create" class="btn btn-outline-primary">Vytvořít novou údálost</a>
+        @if (User.IsInRole(Roles.AdminRole))
+        {
+            <a asp-action="Create" class="btn btn-outline-primary">Vytvořít novou údálost</a>
+        }
     }
     else
     {
 
         <p>
-            @if (User.IsInRole(Role.RoleAdmin))
+            @if (User.IsInRole(Roles.AdminRole))
             {
                 <a asp-action="Create" class="btn btn-primary">Vytvořit novou údálost</a>
             }
@@ -55,42 +58,42 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.NazevUdálosti)
+                            @Html.DisplayFor(modelItem => item.EventName)
                         </td>
                         <td>
-                            @(item.PopisUdalosti.Length > 15 ? item.PopisUdalosti.Substring(0, 15) + "..." : item.PopisUdalosti)
+                            @(item.EventDescription.Length > 15 ? item.EventDescription.Substring(0, 15) + "..." : item.EventDescription)
                             
                         </td>
                         <td>
-                            @item.DatumUdalosti.ToShortDateString() - @item.DatumUdalosti.ToShortTimeString()
+                            @item.EventDate.ToShortDateString() - @item.EventDate.ToShortTimeString()
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.MistoKonani)
+                            @Html.DisplayFor(modelItem => item.EventPlace)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.MaxPocetUcastniku)
+                            @Html.DisplayFor(modelItem => item.MaxNumberOfParticipants)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Interpret.NazevInterpreta)
+                            @Html.DisplayFor(modelItem => item.Interpret.NameOfInterpret)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ZucastniSe)
+                            @Html.DisplayFor(modelItem => item.WillParticipate)
                         </td>
                         <td>
-                            @if (User.IsInRole(Role.RoleAdmin))
+                            @if (User.IsInRole(Roles.AdminRole))
                             {
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary px-1">Editace</a>
                             }
                             <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info px-1">Detail akce</a>
-                            @if (User.IsInRole(Role.RoleAdmin))
+                            @if (User.IsInRole(Roles.AdminRole))
                             {
                                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger px-1">Odstranit akci</a>
                             }
-                            @if (User.IsInRole(Role.RoleUser))
+                            @if (User.IsInRole(Roles.UserRole))
                             {
-                                if (item.ZucastniSe < item.MaxPocetUcastniku)
+                                if (item.WillParticipate < item.MaxNumberOfParticipants)
                                 {
-                                    <a asp-action="PridatSe" asp-route-id="@item.Id" class="btn btn-secondary px-1">Zůčastním se</a>
+                                    <a asp-action="AddYourself" asp-route-id="@item.Id" class="btn btn-secondary px-1">Zůčastním se</a>
                                 }else
                                 {
                                     <a class="btn btn-danger disabled">Akce je plná</a>

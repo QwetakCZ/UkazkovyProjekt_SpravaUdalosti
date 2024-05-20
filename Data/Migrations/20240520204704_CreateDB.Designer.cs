@@ -12,8 +12,8 @@ using SpravaUdalosti.Data;
 namespace SpravaUdalosti.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240520090641_UpdateDB")]
-    partial class UpdateDB
+    [Migration("20240520204704_CreateDB")]
+    partial class CreateDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -231,29 +231,32 @@ namespace SpravaUdalosti.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DatumUdalosti")
+                    b.Property<DateTime>("EventDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("InterpretId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaxPocetUcastniku")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MistoKonani")
+                    b.Property<string>("EventDescription")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("NazevUdálosti")
+                    b.Property<string>("EventName")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("PopisUdalosti")
+                    b.Property<string>("EventPlace")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("InterpretId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxNumberOfParticipants")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WillParticipate")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -270,22 +273,22 @@ namespace SpravaUdalosti.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("HudebniZanr")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NazevInterpreta")
+                    b.Property<string>("CountryOfOrigin")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PopisInterpreta")
+                    b.Property<string>("DescriptionOfInterpret")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("ZemePuvodu")
+                    b.Property<int>("MusicGenre")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NameOfInterpret")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 

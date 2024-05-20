@@ -24,13 +24,13 @@ namespace SpravaUdalosti.Controllers
             _userManager = userManager;
         }
 
-        // Metoda pro načtení informací o uživatelích
-        private async Task<List<UzivatelInfo>> NactiUzivateleAsync()
+        // Method for loading user information
+        private async Task<List<UserInfo>> LoadUsersAsync()
         {
-            var uzivatele = await _context.Users
-                .Select(u => new UzivatelInfo
+            var users = await _context.Users
+                .Select(u => new UserInfo
                 {
-                    Jmeno = u.UserName,
+                    Name = u.UserName,
                     Email = u.Email,
                     Role = _context.UserRoles
                         .Where(r => r.UserId == u.Id)
@@ -40,27 +40,27 @@ namespace SpravaUdalosti.Controllers
 
             var roles = await _roleManager.Roles.Select(r => r.Name).ToListAsync();
 
-            var uzivatelVRoli = new Dictionary<string, List<string>>();
+            var UserInRole = new Dictionary<string, List<string>>();
             foreach (var role in roles)
             {
                 var usersInRole = await _userManager.GetUsersInRoleAsync(role);
-                uzivatelVRoli.Add(role, usersInRole.Select(u => u.UserName).ToList());
+                UserInRole.Add(role, usersInRole.Select(u => u.UserName).ToList());
             }
 
-            foreach (var user in uzivatele)
+            foreach (var user in users)
             {
-                user.Role = uzivatelVRoli
-                    .Where(r => r.Value.Contains(user.Jmeno))
+                user.Role = UserInRole
+                    .Where(r => r.Value.Contains(user.Name))
                     .Select(r => r.Key)
                     .ToArray();
             }
 
-            return uzivatele;
+            return users;
         }
 
-        // Metoda pro přidání nebo odebrání role uživateli
+        // Method for adding or removing a role from a user
         [HttpPost]
-        public async Task<IActionResult> Role(string userName, string roleName)
+        public async Task<IActionResult> Roles(string userName, string roleName)
         {
             var user = await _userManager.FindByNameAsync(userName);
             if (await _userManager.IsInRoleAsync(user, roleName))
@@ -76,16 +76,16 @@ namespace SpravaUdalosti.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // Metoda pro zobrazení seznamu uživatelů
+        // Method for displaying a list of users
         public async Task<ActionResult> Index()
         {
-            var uzivatele = await NactiUzivateleAsync();
-            return View(uzivatele);
+            var users = await LoadUsersAsync();
+            return View(users);
         }
 
-        public record UzivatelInfo
+        public record UserInfo
         {
-            public string Jmeno { get; set; }
+            public string Name { get; set; }
             public string Email { get; set; }
             public string[] Role { get; set; }
         }
