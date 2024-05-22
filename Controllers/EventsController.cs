@@ -176,10 +176,10 @@ namespace SpravaUdalosti.Controllers
         /// <returns></returns>
         public async Task<IActionResult> AddYourself(int id)
         {
-            var pricti = await _context.Event.FindAsync(id);
-            if (pricti != null)
+            var add = await _context.Event.FindAsync(id);
+            if (add != null)
             {
-                pricti.WillParticipate++;
+                add.WillParticipate++;
             }
 
             await _context.SaveChangesAsync();
